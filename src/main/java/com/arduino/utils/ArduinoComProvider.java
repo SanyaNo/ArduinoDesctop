@@ -14,12 +14,12 @@ import gnu.io.SerialPortEvent;
 import gnu.io.SerialPortEventListener;
 
 @Component
-public final class ArduinoComProvider implements SerialPortEventListener {
+public class ArduinoComProvider implements SerialPortEventListener {
 
 	private SerialPort serialPort;
 	/** The port we're normally going to use. */
 
-	private String currentLine;
+	private Integer currentLine;
 
 	private boolean isRunning = false;
 
@@ -102,7 +102,7 @@ public final class ArduinoComProvider implements SerialPortEventListener {
 	public synchronized void serialEvent(SerialPortEvent oEvent) {
 		if (oEvent.getEventType() == SerialPortEvent.DATA_AVAILABLE) {
 			try {
-				String inputLine = input.readLine();
+				Integer inputLine = input.read();
 				currentLine = inputLine;
 
 			} catch (Exception e) {
@@ -112,8 +112,8 @@ public final class ArduinoComProvider implements SerialPortEventListener {
 		// Ignore all the other eventTypes, but you should consider the other
 		// ones.
 	}
-
-	public String getCurrentLine() {
+	
+	public Integer getCurrentLine() {
 		return currentLine;
 	}
 

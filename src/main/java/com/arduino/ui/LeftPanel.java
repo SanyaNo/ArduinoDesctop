@@ -2,6 +2,7 @@ package com.arduino.ui;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.BorderFactory;
@@ -18,29 +19,35 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.arduino.dispatcher.Dispatcher;
-import com.arduino.model.Note;
+import com.arduino.model.Sheet;
 
 @Component("leftPanel")
 public class LeftPanel extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	@Autowired
+	private JFrame myWindow;
+
+	@Autowired
+	Dispatcher dispatcher;
+
+	@Autowired
+	private SheetArea sheetArea;
+
 	private JTree menu;
 
 	private Object selectedNode = "";
-
-	private JFrame win;
-	
-	@Autowired
-	Dispatcher dispatcher;
-	
-	@Autowired
-	private SheetArea sheetArea;
 
 	public LeftPanel() {
 
 		// TODO fit tree hierarchy
 
 		DefaultMutableTreeNode node = new DefaultMutableTreeNode("Sheets");
-		//populateSheetNode(node);
+		// populateSheetNode(node);
 		menu = new JTree(node);
 		menu.setShowsRootHandles(true);
 		menu.addTreeSelectionListener(new TreeSelectionListener() {
@@ -55,15 +62,13 @@ public class LeftPanel extends JPanel {
 				selectedNode = node.getUserObject();
 				String title = selectedNode.toString();
 				/* React to the node selection. */
-				MyWindow win = (MyWindow) menu.getParent().getParent().getParent().getParent().getParent().getParent()
-						.getParent();
-				sheetArea = (SheetArea) win.getSheetArea();
 				sheetArea.removeAll();
-				List<Note> score = dispatcher.getScore(title);
-				//sif (!title.equals("Sheets")) sheetArea.paintScore(score, title);
-				
-				win.validate();
-				win.repaint();
+				// List<Tone> score = dispatcher.getScore(title);
+				// if (!title.equals("Sheets")) sheetArea.paintScore(score,
+				// title);
+
+				myWindow.validate();
+				myWindow.repaint();
 
 			}
 		});
@@ -79,15 +84,13 @@ public class LeftPanel extends JPanel {
 
 	}
 
-//	public void populateSheetNode(DefaultMutableTreeNode node) {
-//
-//		ArrayList<Sheet> sheet = Dispatcher.getSheets();
-//		for (Sheet sh : sheet) {
-//
-//			node.add(new DefaultMutableTreeNode(sh.getName()));
-//
-//		}
-//	}
+	public void populateSheetNode(DefaultMutableTreeNode node) {
+
+		List<Sheet> sheets = dispatcher.findAll();
+		for (Sheet sh : sheets) {
+			node.add(new DefaultMutableTreeNode(sh.getName()));
+		}
+	}
 
 	public Object getSelectedNode() {
 		return selectedNode;

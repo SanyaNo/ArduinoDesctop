@@ -7,9 +7,9 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.arduino.model.Note;
 import com.arduino.model.Sheet;
 import com.arduino.model.SheetDoa;
+import com.arduino.model.Tone;
 
 @Service
 @Transactional
@@ -54,11 +54,9 @@ public class SheetServiceImpl implements SheetService {
 	}
 
 	@Override
-	public List<Note> getScore(String title) {
+	public List<Tone> getScore(String title) {
 		// TODO Auto-generated method stub
-		return sheetDao.getScore(String title);
+		return sheetDao.getScore(title);
 	}
-	
-
 
 }

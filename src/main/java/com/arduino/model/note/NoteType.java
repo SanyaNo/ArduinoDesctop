@@ -1,4 +1,4 @@
-package com.arduino.model;
+package com.arduino.model.note;
 
 public final class NoteType {
 	

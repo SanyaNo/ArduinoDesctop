@@ -16,7 +16,7 @@ import javax.persistence.Table;
 @Table(name = "SHEET")
 @NamedQueries({
     @NamedQuery(name=Sheet.GET_SCORE,
-                query="SELECT s FROM Sheet")
+                query="SELECT t FROM Tone t JOIN t.sheet s where s.name = :title"),
 }) 
 public class Sheet {
 	

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.arduino.model.Note;
 import com.arduino.model.Sheet;
+import com.arduino.model.Tone;
 
 public interface SheetService {
 
@@ -19,6 +20,6 @@ public interface SheetService {
 
 	boolean exists(Long id);
 
-	List<Note> getScore(String title);
+	List<Tone> getScore(String title);
 
 }
