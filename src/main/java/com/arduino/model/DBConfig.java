@@ -5,6 +5,7 @@ import java.util.Properties;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
+import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
@@ -15,22 +16,25 @@ import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableJpaRepositories("com.arduino.model")
+@EnableTransactionManagement
 public class DBConfig {
 
 	@Bean
 	   public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-	      LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
-	      em.setDataSource(dataSource());
-	      em.setPackagesToScan(new String[] { "com.arduino.model" });
+	      LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
+	      emf.setDataSource(dataSource());
+	      emf.setPackagesToScan(new String[] { "com.arduino.model" });
 	 
 	      JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-	      em.setJpaVendorAdapter(vendorAdapter);
-	      em.setJpaProperties(additionalProperties());
-	 
-	      return em;
+	      emf.setJpaVendorAdapter(vendorAdapter);
+	      emf.setJpaProperties(additionalProperties());
+	      emf.setPersistenceProviderClass(HibernatePersistenceProvider.class);
+	      emf.afterPropertiesSet();
+	      return emf;//.getObject()
 	   }
 	 
 	   @Bean
@@ -58,8 +62,11 @@ public class DBConfig {
 	 
 	   Properties additionalProperties() {
 	      Properties properties = new Properties();
-	      properties.setProperty("hibernate.hbm2ddl.auto", "create");
+	      properties.setProperty("hibernate.hbm2ddl.auto", "update");
 	      properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
+	      properties.getProperty("hibernate.show_sql", "true");
+	      properties.getProperty("hibernate.format_sql", "true");
+	      properties.getProperty("hibernate.connection.charSet", "UTF-8");
 	      return properties;
 	   }
 

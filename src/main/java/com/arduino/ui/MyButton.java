@@ -5,13 +5,11 @@ import java.awt.Dimension;
 
 import javax.swing.JButton;
 
+import org.springframework.stereotype.Component;
+
 
 public class MyButton extends JButton {
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -3235609526808176809L;
 
 	public MyButton(String name){
 		

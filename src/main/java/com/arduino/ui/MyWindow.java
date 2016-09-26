@@ -2,12 +2,11 @@ package com.arduino.ui;
 
 import java.awt.BorderLayout;
 
+import javax.annotation.PostConstruct;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -31,19 +30,29 @@ public class MyWindow extends JFrame {
 	@Qualifier("leftPanel")
 	private JPanel  leftPanel;
 	
-	
+	@Autowired
 	private JMenuBar  toolbar;
 	
 	@Autowired
 	@Qualifier("sheetArea")
 	private JPanel  sheetArea;
 
+	
 	public MyWindow() {
-
-		super("Arduino Project");
+		super("Arduino Note Reader");
+		this.housekeeping();
+	}
+	
+	@PostConstruct
+	public void housekeeping(){
+		
 		Designer.setNumbusLookAndFeel();
 		setDefaultWindowProperties();
-
+		this.add(leftPanel, BorderLayout.WEST);
+		this.add(toolbar, BorderLayout.NORTH);
+		this.add(sheetArea, BorderLayout.CENTER);
+		this.repaint();
+		this.revalidate();
 	}
 
 

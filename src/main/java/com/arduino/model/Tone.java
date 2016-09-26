@@ -33,7 +33,7 @@ public class Tone {
 	private Sheet sheet;
 	
 	
-	Tone(){}
+	public Tone(){}
 	//end constructor
 	
 	public Long getId(){

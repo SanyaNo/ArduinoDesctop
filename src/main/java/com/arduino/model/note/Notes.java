@@ -10,7 +10,7 @@ import java.util.Map;
  */
 public final class Notes {
 	
-	public static final Map<Integer, Map<String, Integer>> notes = new HashMap<Integer, Map<String, Integer>>();
+	public static final Map<Integer, Map<String, Integer>> NOTES = new HashMap<Integer, Map<String, Integer>>();
 	
 	private static Map<String, Integer> C4 = new HashMap<String, Integer>();
 	private static Map<String, Integer> D4 = new HashMap<String, Integer>();
@@ -32,14 +32,14 @@ public final class Notes {
 		B4.put("B4", (Integer) NoteType.B4);
 		C5.put("C5", (Integer) NoteType.C5);
 		
-		notes.put(1, C4);
-		notes.put(2, D4);
-		notes.put(3, E4);
-		notes.put(4, F4);
-		notes.put(5, G4);
-		notes.put(6, A4);
-		notes.put(7, B4);
-		notes.put(8, C5);
+		NOTES.put(1, C4);
+		NOTES.put(2, D4);
+		NOTES.put(3, E4);
+		NOTES.put(4, F4);
+		NOTES.put(5, G4);
+		NOTES.put(6, A4);
+		NOTES.put(7, B4);
+		NOTES.put(8, C5);
 		
 	}
 	

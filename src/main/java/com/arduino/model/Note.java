@@ -22,7 +22,7 @@ public class Note {
 	@Column(name = "PITCH", unique=true, nullable = false)
 	private int pitch;
 
-	Note() {
+	public Note() {
 	}
 
 	public Note(String name, int pitch) {

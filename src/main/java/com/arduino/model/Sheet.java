@@ -17,10 +17,12 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(name=Sheet.GET_SCORE,
                 query="SELECT t FROM Tone t JOIN t.sheet s where s.name = :title"),
+   
 }) 
 public class Sheet {
 	
 	public static final String GET_SCORE = "Sheet.getScore";
+	public static final String GET_SHEET = "Sheet.getSheet";
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -21,10 +21,8 @@ public class Toolbar extends JMenuBar implements ActionListener {
 
 	private JMenu file;
 	
-	@Autowired
 	private MyButton start;
 	
-	@Autowired
 	private MyButton stop;
 	
 	public Toolbar(){

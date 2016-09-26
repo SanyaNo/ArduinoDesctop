@@ -11,8 +11,6 @@ public class ArduinoDesktopApplication {
 		SpringApplicationBuilder builder = new SpringApplicationBuilder(ArduinoDesktopApplication.class);
 		builder.headless(false).run(args);
 		
-		App app = new App();
-		
 	}
 	
 }

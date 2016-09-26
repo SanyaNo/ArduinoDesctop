@@ -19,7 +19,7 @@ public class ArduinoComProvider implements SerialPortEventListener {
 	private SerialPort serialPort;
 	/** The port we're normally going to use. */
 
-	private Integer currentLine;
+	private String currentLine;
 
 	private boolean isRunning = false;
 
@@ -102,7 +102,7 @@ public class ArduinoComProvider implements SerialPortEventListener {
 	public synchronized void serialEvent(SerialPortEvent oEvent) {
 		if (oEvent.getEventType() == SerialPortEvent.DATA_AVAILABLE) {
 			try {
-				Integer inputLine = input.read();
+				String inputLine = input.readLine();
 				currentLine = inputLine;
 
 			} catch (Exception e) {
@@ -113,7 +113,7 @@ public class ArduinoComProvider implements SerialPortEventListener {
 		// ones.
 	}
 	
-	public Integer getCurrentLine() {
+	public String getCurrentLine() {
 		return currentLine;
 	}
 
